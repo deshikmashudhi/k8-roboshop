@@ -23,7 +23,7 @@ spec:
     spec:
      containers:
       - name: catalogue
-        image: mashudhideshik/catalogue:1.0.0
+        image: mashudhideshik/catalogue:latest
         envFrom:
         - configMapRef:
             name: catalogue
