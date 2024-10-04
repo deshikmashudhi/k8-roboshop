@@ -16,7 +16,7 @@ spec:
   template: #this is pod defination
     metadata:
       labels:
-        app: nginx
+        app: mangodb
         tier: db
         project: roboshop
     spec:
