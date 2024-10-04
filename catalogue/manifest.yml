@@ -2,6 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: catalouge
+  namespace: roboshop
   labels: #these labels belongs to deployment
     app: catalogue
     tier: app
@@ -31,6 +32,7 @@ apiVersion: v1  #every pod should be attached with service soo other pods can co
 kind: Service
 metadata:
   name: catalogue
+  namespace: roboshop
 spec:
   selector:
      app: catalogue
@@ -46,6 +48,7 @@ apiVersion: v1
 kind: ConfigMap
 metadata:
   name: catalogue
+  namespace: roboshop
 data:
   MANGO: "true"  #keep true in double quotes
   MANGO_URL: "mongodb://mangodb:27017/catalogue"  #protocol//service-name:service-port/schema
