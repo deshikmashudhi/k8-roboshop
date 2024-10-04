@@ -12,13 +12,13 @@ spec:
     matchLabels: #these labels should match with pods 
       app: mangodb
       tier: db
-    project: roboshop
+      project: roboshop
   template: #this is pod defination
     metadata:
       labels:
         app: nginx
         tier: db
-    project: roboshop
+        project: roboshop
     spec:
      containers:
       - name: mangodb
