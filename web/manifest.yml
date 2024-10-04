@@ -135,28 +135,28 @@ spec:
         tier: web
         project: roboshop
     spec:
-     containers:
-      - name: catalogue
-        image: mashudhideshik/web:1.0.0
-        resources:
-          requests:
-            cpu: "50m"
-            memory: "68Mi"
-          limits:
-            cpu: "100m"
-            memory: "128Mi"
+      volumes:
+        - name: nginx-conf
+          configMap:
+           name: nginx
+           items:
+            - key: nginx.conf
+              path: nginx.conf
+      containers:
+        - name: catalogue
+          image: mashudhideshik/web:1.0.0
+          resources:
+            requests:
+              cpu: "50m"
+              memory: "68Mi"
+            limits:
+              cpu: "100m"
+              memory: "128Mi"
           volumeMounts:
            - name: nginx-conf  #refer the volume it should be matched
              mountPath: /etc/nginx/nginx.conf
              subpath: nginx.conf
              readOnly: true
-     volumes: 
-        - name: nginx-conf
-          configMap:
-            name: nginx
-            items: 
-             - key: nginx.conf
-               path: nginx.conf 
 ---
 apiVersion: v1  #every pod should be attached with service soo other pods can communicate
 kind: Service
