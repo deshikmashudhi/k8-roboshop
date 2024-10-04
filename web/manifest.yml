@@ -143,8 +143,15 @@ spec:
         - key: nginx.conf
           path: nginx.conf 
      containers:
-      - name: web
+      - name: catalogue
         image: mashudhideshik/web:1.0.0
+        resources:
+          requests:
+            cpu: "50m"
+            memory: "68Mi"
+          limits:
+            cpu: "100m"
+            memory: "128Mi"
         volumeMounts:
         - name: nginx-conf  #refer the volume it should be matched
           mountPath: /etc/nginx/nginx.conf
