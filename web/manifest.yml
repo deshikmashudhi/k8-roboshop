@@ -152,11 +152,11 @@ spec:
           limits:
             cpu: "100m"
             memory: "128Mi"
-        volumeMounts:
-        - name: nginx-conf  #refer the volume it should be matched
-          mountPath: /etc/nginx/nginx.conf
-          subpath: nginx.conf
-          readOnly: true
+     volumeMounts:
+      - name: nginx-conf  #refer the volume it should be matched
+        mountPath: /etc/nginx/nginx.conf
+        subpath: nginx.conf
+        readOnly: true
 ---
 apiVersion: v1  #every pod should be attached with service soo other pods can communicate
 kind: Service
@@ -174,7 +174,6 @@ spec:
     port: 80 #this port belongs to service
     protocol: TCP
     targetPort: 80  #this port belongs to continer
----
 ---
 apiVersion: autoscaling/v2
 kind: HorizontalPodAutoscaler
