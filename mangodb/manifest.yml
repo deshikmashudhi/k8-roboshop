@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mangodb
+  labels: #these labels belongs to deployment
+    app: mangodb
+    tier: db
+    project: roboshop
+spec:
+  replicas: 1
+  selector:
+    matchLabels: #these labels should match with pods 
+      app: mangodb
+      tier: db
+    project: roboshop
+  template: #this is pod defination
+    metadata:
+      labels:
+        app: nginx
+        tier: db
+    project: roboshop
+    spec:
+     containers:
+      - name: mangodb
+        image: mashudhideshik/mangodb:1.0.0
+        
