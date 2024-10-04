@@ -1,0 +1,52 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: catalouge
+  labels: #these labels belongs to deployment
+    app: catalogue
+    tier: app
+    project: roboshop
+spec:
+  replicas: 1
+  selector:
+    matchLabels: #these labels should match with pods 
+      app: catalogue
+      tier: app
+      project: roboshop
+  template: #this is pod defination
+    metadata:
+      labels:
+        app: catalogue
+        tier: app
+        project: roboshop
+    spec:
+     containers:
+      - name: catalogue
+        image: mashudhideshik/catalogue:1.0.0
+        envFrom:
+        - configMapRef:
+            name: catalogue
+--- 
+apiVersion: v1  #every pod should be attached with service soo other pods can communicate
+kind: Service
+metadata:
+  name: catalogue
+spec:
+  selector:
+     app: catalogue
+     tier: app
+     project: roboshop
+  ports:
+  - name: mangoapp-port
+    port: 8080 #this port belongs to service
+    protocol: TCP
+    targetPort: 8080  #this port belongs to continer
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: catalogue
+data:
+  MANGO: "true"  #keep true in double quotes
+  MANGO_URL: "mongodb://mangodb:27017/catalogue"  #protocol//service-name:service-port/schema
+

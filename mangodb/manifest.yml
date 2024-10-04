@@ -28,7 +28,7 @@ spec:
 apiVersion: v1  #every pod should be attached with service soo other pods can communicate
 kind: Service
 metadata:
-  name: mangodbd
+  name: mangodb
 spec:
   selector:
      app: mangodb
