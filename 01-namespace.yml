@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx-deployment
+  labels: #these labels belongs to deployment
+    app: nginx
+spec:
+  replicas: 10
+  selector:
+    matchLabels: #these labels should match with pods 
+      app: nginx
+      project: roboshop
+      component: frontend
+  template: #this is pod defination
+    metadata:
+      labels:
+        app: nginx
+        project: roboshop
+        component: frontend
+    spec:
+     containers:
+      - name: nginx
+        image: nginx:latest
+        ports:
+        - containerPort: 80
