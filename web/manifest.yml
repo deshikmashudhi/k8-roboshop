@@ -135,13 +135,6 @@ spec:
         tier: web
         project: roboshop
     spec:
-     volumes: 
-     - name: nginx-conf
-       configMap:
-        name: nginx
-        items: 
-        - key: nginx.conf
-          path: nginx.conf 
      containers:
       - name: catalogue
         image: mashudhideshik/web:1.0.0
@@ -157,6 +150,13 @@ spec:
              mountPath: /etc/nginx/nginx.conf
              subpath: nginx.conf
              readOnly: true
+     volumes: 
+        - name: nginx-conf
+          configMap:
+            name: nginx
+            items: 
+             - key: nginx.conf
+               path: nginx.conf 
 ---
 apiVersion: v1  #every pod should be attached with service soo other pods can communicate
 kind: Service
