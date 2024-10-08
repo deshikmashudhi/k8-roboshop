@@ -1,8 +1,8 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: roboshop1
-  namespace: roboshop
+  name: roboshop deshik
+ # namespace: roboshop
 spec:
   replicas: 1
   selector:
