@@ -144,7 +144,7 @@ spec:
             path: nginx.conf
       containers:
       - name: catalogue
-        image: mashudhideshik/web:1.0.0
+        image: mashudhideshik/web:latest
         resources:
           requests:
             cpu: "50m"
