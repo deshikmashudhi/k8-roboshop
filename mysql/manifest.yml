@@ -24,6 +24,9 @@ spec:
      containers:
       - name: mysql
         image: mashudhideshik/mysql:1.0.0
+        env_from:
+        - configMapRef:
+            name: mysql
 
 --- 
 apiVersion: v1  #every pod should be attached with service soo other pods can communicate
