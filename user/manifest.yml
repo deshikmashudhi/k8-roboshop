@@ -1,48 +1,49 @@
+
 apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: user
   namespace: roboshop
-  labels: #these labels belongs to deployment
+  labels: # these labels belong to deployment
     app: user
     tier: app
     project: roboshop
 spec:
   replicas: 1
   selector:
-    matchLabels: #these labels should match with pods 
+    matchLabels: # these labels should match with pod
       app: user
       tier: app
       project: roboshop
-  template: #this is pod defination
+  template: # this is the pod definition
     metadata:
       labels:
         app: user
         tier: app
         project: roboshop
     spec:
-     containers:
+      containers:
       - name: user
-        image: mashudhideshik/user:latest
+        image: joindevops/user:1.0.0
         envFrom:
         - configMapRef:
             name: user
---- 
-apiVersion: v1  #every pod should be attached with service soo other pods can communicate
+---
+apiVersion: v1
 kind: Service
 metadata:
   name: user
   namespace: roboshop
 spec:
   selector:
-     app: user
-     tier: app
-     project: roboshop
+    app: user
+    tier: app
+    project: roboshop
   ports:
-  - name: mangoadb-port
-    port: 8080 #this port belongs to service
+  - name: mongodb-port
     protocol: TCP
-    targetPort: 8080  #this port belongs to continer
+    port: 8080 # this port belongs to service
+    targetPort: 8080 # this port belongs to container
 ---
 apiVersion: v1
 kind: ConfigMap
@@ -50,8 +51,6 @@ metadata:
   name: user
   namespace: roboshop
 data:
-  MANGO: "true"  #keep true in double quotes
-  MANGO_URL: "mongodb://mangodb:27017/user"  #protocol//service-name:service-port/schema
-  REDIS_HOST: "reids"
-
-
+  MONGO: "true" # keep true in double quotes
+  MONGO_URL: "mongodb://mongodb:27017/user"  # protocol//service-name:service-port/schema
+  REDIS_HOST: "redis"

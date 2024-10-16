@@ -5,7 +5,6 @@ const bodyParser = require('body-parser');
 const express = require('express');
 const pino = require('pino');
 const expPino = require('express-pino-logger');
-const mongoose = require('mongoose');
 
 // MongoDB
 var db;
@@ -263,13 +262,6 @@ function mongoConnect() {
 }
 }
 
-function setup() {
-    const mongoose = require('mongoose'); // This is scoped to the function
-}
-
-setup();
-console.log(mongoose); // This will throw an error
-
 if (process.env.DOCUMENTDB == 'true') {
 function mongoConnect() {
     return new Promise((resolve, reject) => {
@@ -313,66 +305,3 @@ const port = process.env.USER_SERVER_PORT || '8080';
 app.listen(port, () => {
     logger.info('Started on port', port);
 });
-
-
-
-// const mongoose = require('mongoose');
-
-// function mongoConnect() {
-//     return mongoose.connect('mongodb://localhost:27017/mydatabase', {
-//         useNewUrlParser: true,
-//         useUnifiedTopology: true,
-//     });
-// }
-
-// module.exports = {
-//     mongoConnect,
-// };
-// Ensure mongoose is imported at the top
-
-function setup() {
-    const mongoose = require('mongoose'); // This is scoped to the function
-}
-
-setup();
-console.log(mongoose); // This will throw an error
-
-const mongoose = require('mongoose');
-
-function mongoConnect() {
-    return mongoose.connect('mongodb://localhost:27017/mydatabase', {
-        useNewUrlParser: true,
-        useUnifiedTopology: true,
-    });
-}
-
-function mongoLoop() {
-    mongoConnect().then((r) => {
-        console.log('Connected to MongoDB');
-    }).catch((err) => {
-        console.error('MongoDB connection error:', err);
-    });
-}
-
-mongoLoop();
-
-const mongoose = require('mongoose');
-
-function mongoConnect() {
-    // Using mongoose after it's properly imported
-    return mongoose.connect('mongodb://localhost:27017/mydatabase', {
-        useNewUrlParser: true,
-        useUnifiedTopology: true,
-    });
-}
-
-function mongoLoop() {
-    mongoConnect().then((r) => {
-        console.log('Connected to MongoDB');
-    }).catch((err) => {
-        console.error('MongoDB connection error:', err);
-    });
-}
-
-// Initiate the connection loop
-mongoLoop();
