@@ -53,4 +53,4 @@ metadata:
 data:
   REDIS_HOST: "redis"
   CATALOGUE_HOST: catalogue
-  CATALOUGE_PORT: 8080
+  CATALOUGE_PORT: "8080"
