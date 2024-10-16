@@ -1,0 +1,44 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: redis
+  namespace: roboshop
+  labels: #these labels belongs to deployment
+    app: redis
+    tier: db
+    project: roboshop
+spec:
+  replicas: 1
+  selector:
+    matchLabels: #these labels should match with pods 
+      app: redis
+      tier: db
+      project: roboshop
+  template: #this is pod defination
+    metadata:
+      labels:
+        app: redis
+        tier: db
+        project: roboshop
+    spec:
+     containers:
+      - name: redis
+        image: redis
+
+--- 
+apiVersion: v1  #every pod should be attached with service soo other pods can communicate
+kind: Service
+metadata:
+  name: redis
+  namespace: roboshop
+spec:
+  selector:
+     app: redis
+     tier: db
+     project: roboshop
+  ports:
+  - name: redis-port
+    port: 6379  #this port belongs to service
+    protocol: TCP
+    targetPort: 6379  #this port belongs to continer
+  
