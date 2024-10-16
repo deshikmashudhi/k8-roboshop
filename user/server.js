@@ -305,3 +305,18 @@ const port = process.env.USER_SERVER_PORT || '8080';
 app.listen(port, () => {
     logger.info('Started on port', port);
 });
+
+
+
+const mongoose = require('mongoose');
+
+function mongoConnect() {
+    return mongoose.connect('mongodb://localhost:27017/mydatabase', {
+        useNewUrlParser: true,
+        useUnifiedTopology: true,
+    });
+}
+
+module.exports = {
+    mongoConnect,
+};
