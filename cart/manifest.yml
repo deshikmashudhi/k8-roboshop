@@ -24,7 +24,7 @@ spec:
     spec:
       containers:
       - name: cart
-        image: joindevops/cart:1.0.0
+        image: mashudhideshik/cart:1.0.0
         envFrom:
         - configMapRef:
             name: cart
