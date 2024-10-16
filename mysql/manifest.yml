@@ -26,10 +26,9 @@ spec:
         image: mashudhideshik/mysql:1.0.0
         env_from:
           - configMapRef:
-            name: mysql
-            namespace: roboshop
-
---- 
+              name: mysql
+              namespace: roboshop
+---
 apiVersion: v1  #every pod should be attached with service soo other pods can communicate
 kind: Service
 metadata:
