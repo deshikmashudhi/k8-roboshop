@@ -3,14 +3,16 @@ kind: PersistentVolume
 metadata:
   name: ebs-static
 spec:
-  storageClassName: ""
+  storageClassName: ""  # Leave empty if you don't want to associate it with a storage class
   accessModes:
-  - ReadWriteOnce
-  awsElasticBlockStore:
-    fsType: ext4
-    volumeID: vol-0b5d821a22906e406
+    - ReadWriteOnce
   capacity:
     storage: 100Gi
+  awsElasticBlockStore:
+    volumeID: vol-0b5d821a22906e406
+    fsType: ext4
+
+
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
