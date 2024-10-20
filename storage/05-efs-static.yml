@@ -30,7 +30,7 @@ spec:
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: ebs-static-pvc
+  name: efs-static-pvc
 spec:
   storageClassName: ""
   accessModes:
@@ -70,4 +70,4 @@ spec:
       volumes:
       - name: nginx-html #same name should be given
         persistentVolumeClaim: # this is the PVC
-          claimName: ebs-static-pvc
+          claimName: efs-static-pvc
