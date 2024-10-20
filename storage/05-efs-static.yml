@@ -27,18 +27,6 @@ spec:
     requests:
       storage: 5Gi
 ---
-apiVersion: v1
-kind: PersistentVolumeClaim
-metadata:
-  name: efs-static-pvc
-spec:
-  storageClassName: ""
-  accessModes:
-    - ReadWriteOnce
-  resources:
-    requests:
-      storage: 3Gi
----
 apiVersion: apps/v1
 kind: Deployment
 metadata:
