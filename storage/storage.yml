@@ -1,7 +1,7 @@
 apiVersion: storage.k8s.io/v1
 kind: StorageClass
 metadata:
-   name: ebs-sc
+   name: ebs-sc2
 provisioner: ebs.csi.aws.com
 volumeBindingMode: WaitForFirstConsumer
 parameters: 
@@ -16,7 +16,7 @@ kind: PersistentVolumeClaim
 metadata: 
    name: "ebs-dynamic-pvc"
 spec:
-  storageClassName: "ebs-sc"
+  storageClassName: "ebs-sc2"
   accessModes:
   - ReadWriteOnce
   resources:
