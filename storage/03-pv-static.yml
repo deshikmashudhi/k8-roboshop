@@ -9,7 +9,7 @@ spec:
   capacity:
     storage: 100Gi
   awsElasticBlockStore:
-    volumeID: vol-0b5d821a22906e406
+    volumeID: vol-0369ba539fbf8d73d
     fsType: ext4
 ---
 apiVersion: v1
