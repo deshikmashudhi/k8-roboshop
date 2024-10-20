@@ -1,24 +1,24 @@
 apiVersion: storage.k8s.io/v1
 kind: StorageClass
 metadata:
-   name: ebs-sc2
+  name: ebs-sc2
 provisioner: ebs.csi.aws.com
 volumeBindingMode: WaitForFirstConsumer
-parameters: 
+parameters:
   csi.storage.k8s.io/fstype: xfs
   type: io1
   iopsPerGB: "50"
-  encrypted: "true" 
+  encrypted: "true"
 
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
-metadata: 
-   name: "ebs-dynamic-pvc"
+metadata:
+  name: ebs-statefull-pvc
 spec:
   storageClassName: "ebs-sc2"
   accessModes:
-  - ReadWriteOnce
+    - ReadWriteOnce
   resources:
     requests:
-      storage: 4Gi
+      storage: 10Gi
