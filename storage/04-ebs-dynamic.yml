@@ -7,7 +7,7 @@ volumeBindingMode: WaitForFirstConsumer
 parameters: 
   csi.storage.k8s.io/fstype: xfs
   type: io1
-  iopsPrerGB: "50"
+  iopsPerGB: "50"
   encrypted: "true" 
 
 ---
