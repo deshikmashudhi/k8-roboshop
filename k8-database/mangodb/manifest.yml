@@ -1,0 +1,55 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: mangodb
+  labels: 
+   app: mangodb
+   tier: db
+   project: roboshop
+spec:
+  selector:
+    matchLabels:
+      app: mangodb
+      tier: db
+      project: roboshop # has to match .spec.template.metadata.labels
+  serviceName: "mangodb"
+  replicas: 1 # by default is 1
+  template:
+    metadata:
+      labels:
+        app: mangodb
+        tier: db
+        project: roboshop # has to match .spec.selector.matchLabels
+    spec:
+      containers:
+      - name: mangodb
+        image: mashudhideshik/mangodb:1.0.0
+        volumeMounts:
+        - name: mangodb
+          mountPath: /data/db
+  # this is PVC directly.
+  volumeClaimTemplates:
+  - metadata:
+      name: mangodb
+    spec:
+      accessModes: [ "ReadWriteOnce" ]
+      storageClassName: "roboshop-ebs-dynamic"
+      resources:
+        requests:
+          storage: 5Gi
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: mangodb
+spec:
+  clusterIP: None #headless
+  selector:
+    app: mangodb
+    tier: db
+    project: roboshop
+  ports:
+  - name: mangodb-port
+    protocol: TCP
+    port: 27017 # this port belongs to service
+    targetPort: 27017 # this port belongs to container
